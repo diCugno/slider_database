@@ -22,6 +22,7 @@ app.use("/", express.static(path.join(__dirname, "public")));
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 //upload file
+/*
 app.post('/upload', (req, res) => {
     upload(req, res, (err) => {
         if (err) {
@@ -43,6 +44,11 @@ app.post('/upload', (req, res) => {
                 res.status(500).json({ error: "Errore nel salvataggio nel database" });
             });
     });
+});
+*/
+app.post('/upload', multer({storage: storage}).single('file'), async(req, res) => {
+    await database.insert("./images/" + req.file.originalname);
+    res.json({result: "ok"});
 });
 
 //ottiene lista immagini

@@ -23,7 +23,8 @@ export const createMiddleware = () => {
         //Carica un file
         upload: async(fotoInput) => {
             const formData = new FormData();
-            formData.append("file", fotoInput.files[0]);
+            formData.append("file", fotoInput.files[0]);//.nome
+            //console.log("⛓️⛓️⛓️:  ", fotoInput);
             const body = formData;
             const fetchOptions = {
                 method: 'post',
@@ -32,7 +33,7 @@ export const createMiddleware = () => {
             try {
                 const res = await fetch("/upload", fetchOptions);
                 const data = await res.json();
-                console.log("❤️❤️❤️  ",data);
+                console.log("❤️❤️❤️:  ",data);
             } catch (e){
                 console.log(e);
             }
@@ -192,17 +193,17 @@ export function createAdd(parentElement, pubsub, middleware) {
 
                 const fotoInput = document.getElementById('foto');
                 console.log("FOTOO INPUT: ", fotoInput);
-                const file = fotoInput.files[0]; 
+                const file = fotoInput.files[0];//.name 
                 console.log("🔥🔥🔥:  ", file);
 
 
-                if (!file) {
-                    console.error("Nessun file selezionato!");
-                    return;
-                }
+                //if (!file) {
+                //    console.error("Nessun file selezionato!");
+                //    return;
+                //}
 
-                const uploadedFile = await middleware.upload(fotoInput);
-                console.log("🏃‍♂️🏃‍♂️🏃‍♂️   ",uploadedFile)
+                await middleware.upload(fotoInput);
+                //console.log("🏃‍♂️🏃‍♂️🏃‍♂️   ",fotoInput);
 
 
                 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -210,7 +211,7 @@ export function createAdd(parentElement, pubsub, middleware) {
                 const nuovaFoto = {
                     id: listaFoto.length + 1,
                     nome: nome,
-                    foto: uploadedFile.url
+                    foto: fotoInput
                 };
   
                 // Aggiungi alla lista locale
