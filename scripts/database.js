@@ -28,9 +28,10 @@ const executeQuery = (sql) =>{
 const database = {
     createTable: () => {
         return executeQuery(`
-            CREATE TABLE IF NOT EXIST images
-            (id INT PRIMARY KEY AUTO_INCREMENT, 
-                name VARCHAR(255) NOT NULL)
+            CREATE TABLE IF NOT EXISTS images (
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            name VARCHAR(255) NOT NULL
+            );
                 `);
     },
     insert: (name) => {

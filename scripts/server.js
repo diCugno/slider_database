@@ -36,8 +36,8 @@ app.post('/upload', (req, res) => {
 
         console.log("File caricato:", req.file.filename);
 
-        database.insert("./files/" + req.file.filename)
-            .then(() => res.json({ url: "/files/" + req.file.filename }))
+        database.insert("./images/" + req.file.filename)
+            .then(() => res.json({ url: "/images/" + req.file.filename }))
             .catch((dbError) => {
                 console.error("Errore nel database:", dbError);
                 res.status(500).json({ error: "Errore nel salvataggio nel database" });

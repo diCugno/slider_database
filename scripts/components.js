@@ -32,7 +32,7 @@ export const createMiddleware = () => {
             try {
                 const res = await fetch("/upload", fetchOptions);
                 const data = await res.json();
-                console.log(data);
+                console.log("❤️❤️❤️  ",data);
             } catch (e){
                 console.log(e);
             }
@@ -193,20 +193,24 @@ export function createAdd(parentElement, pubsub, middleware) {
                 const fotoInput = document.getElementById('foto');
                 console.log("FOTOO INPUT: ", fotoInput);
                 const file = fotoInput.files[0]; 
+                console.log("🔥🔥🔥:  ", file);
+
 
                 if (!file) {
                     console.error("Nessun file selezionato!");
                     return;
                 }
 
-                await middleware.upload(fotoInput);
+                const uploadedFile = await middleware.upload(fotoInput);
+                console.log("🏃‍♂️🏃‍♂️🏃‍♂️   ",uploadedFile)
+
 
                 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
                 const nuovaFoto = {
                     id: listaFoto.length + 1,
                     nome: nome,
-                    foto: foto
+                    foto: uploadedFile.url
                 };
   
                 // Aggiungi alla lista locale
